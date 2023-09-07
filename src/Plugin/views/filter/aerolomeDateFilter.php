@@ -21,33 +21,16 @@ class aerolomeDateFilter extends BooleanOperator {
     public function query() {
         $this->ensureMyTable();
         $dayId = 0;
-        $todayId = date("w");
-        switch ($todayId) {
-            case 0:
-                $dayId = 23;
-                break;
-            case 1:
-                $dayId = 17;
-                break;
-            case 2:
-                $dayId = 18;
-                break;
-            case 3:
-                $dayId = 19;
-                break;
-            case 4:
-                $dayId = 20;
-                break;
-            case 5:
-                $dayId = 21;
-                break;
-            case 6:
-                $dayId = 22;
-                break;
-            default:
-                # code...
-                break;
-        }
+        $todayId = (int) date("w");
+        $dayId = match ($todayId) {
+            0 => 23,
+            1 => 17,
+            2 => 18,
+            3 => 19,
+            4 => 20,
+            5 => 21,
+            6 => 22,
+        };
         $real_field = $this->tableAlias . '.' . $this->realField;
         $this->query->addWhere('AND', $real_field, $dayId, '=');
     }
