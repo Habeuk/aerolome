@@ -50,7 +50,7 @@ class aerolomeDateFilter extends BooleanOperator {
         }
         $real_field = $this->tableAlias . '.' . $this->realField;
         if (!empty($this->value)) {
-            $this->query->addWhere('OR', $real_field, $dayId, '=');
+            $this->query->addWhere('AND', $real_field, $dayId, '=');
         }
     }
 }
