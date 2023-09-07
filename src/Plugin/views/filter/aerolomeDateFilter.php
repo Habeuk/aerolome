@@ -1,4 +1,4 @@
-<?
+<?php
 
 namespace Drupal\aerolome\Plugin\views\filter;
 
