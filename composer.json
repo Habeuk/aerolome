@@ -1,5 +1,5 @@
 {
-  "name": "vystii/aerolome",
+  "name": "habeuk/aerolome",
   "description": "Module pour l'intégration de paragraphes drupal",
   "type": "drupal-module-custom",
   "require": {
