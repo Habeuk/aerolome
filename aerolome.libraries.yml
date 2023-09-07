@@ -1,0 +1,37 @@
+aerolome_hero_section:
+  js:
+    js/aerolome_hero_section.js: {}
+  css:
+    theme:
+      css/aerolome-hero-sections.css: {}
+
+aerolome_accordion_section:
+  js:
+    js/aerolome-accordion-section.js: {}
+  css:
+    theme:
+      css/aerolome_accordion_section.css: {}
+
+aerolome_vue_lib:
+  js:
+    https://unpkg.com/vue@3/dist/vue.global.js:
+      { type: external, minified: true }
+
+aerolome_hero_teaser:
+  js:
+    layouts/js/aerolome_hero_teaser.js: {}
+  scss:
+
+aerolome_booking_parking:
+  js:
+    files/parkingApp.umd.js: {}
+  css:
+    component:
+      files/style.css: {}
+
+aerolome_fly_app:
+  js:
+    flyBooking/flyBooking.umd.js: {}
+  css:
+    component:
+      flyBooking/style.css: {}
