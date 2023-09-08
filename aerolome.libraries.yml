@@ -14,7 +14,7 @@ aerolome_accordion_section:
 
 aerolome_vue_lib:
   js:
-    https://unpkg.com/vue@3/dist/vue.global.js:
+    https://unpkg.com/vue@3/dist/vue.global.prod.js:
       { type: external, minified: true }
 
 aerolome_hero_teaser:
