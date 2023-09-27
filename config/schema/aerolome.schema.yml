@@ -5,3 +5,11 @@ block.settings.aerolome_book_parking:
     example:
       type: string
       label: Example
+
+block.settings.aerolome_menu_links_list:
+  type: block_settings
+  label: 'Menu links List block'
+  mapping:
+    foo:
+      type: string
+      label: Foo

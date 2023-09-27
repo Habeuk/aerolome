@@ -1,6 +1,30 @@
 <?php
 
 /**
+ *
  * @file
  * Primary module hooks for aeroLome module.
  */
+
+/**
+ * implement hook_preprocess_views_view_table
+ */
+function aerolome_preprocess_views_view_table(&$vars) {
+  if (!empty($vars['rows'])) {
+    $header = $vars['header'];
+    foreach ($vars['rows'] as &$row) {
+      foreach ($row['columns'] as $fieldName => &$value) {
+        if (!empty($header[$fieldName])) {
+          $label = $header[$fieldName]['content'];
+          /**
+           *
+           * @var \Drupal\Core\Template\Attribute $attributes
+           */
+          $attributes = $value['attributes'];
+          $attributes->setAttribute('data-label', $label);
+          $value['attributes'] = $attributes;
+        }
+      }
+    }
+  }
+}
