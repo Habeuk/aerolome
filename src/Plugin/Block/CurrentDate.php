@@ -53,7 +53,6 @@ class CurrentDate extends BlockBase {
    */
   public function build() {
     $build = [];
-    $build['#theme'] = 'current_date';
     $build['current_date']['#markup'] = \Drupal::service('date.formatter')->format(strtotime("today"), 'custom', $this->configuration['date_format'], NULL, 'fr');
     return $build;
   }
