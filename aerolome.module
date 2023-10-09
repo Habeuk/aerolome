@@ -12,6 +12,13 @@
 function aerolome_preprocess_views_view_table(&$vars) {
   if (!empty($vars['rows'])) {
     $header = $vars['header'];
+    $temp_rendered_array = [];
+    usort($vars["view"]->result, "aerolome_cmp_vols_date");
+    for ($i = 0; $i < count($vars["view"]->result); $i++) {
+      $row_index = $vars["view"]->result[$i]->index;
+      $temp_rendered_array[] = $vars["rows"][$row_index];
+    }
+    $vars["rows"] = $temp_rendered_array;
     foreach ($vars['rows'] as &$row) {
       foreach ($row['columns'] as $fieldName => &$value) {
         if (!empty($header[$fieldName])) {
@@ -27,4 +34,23 @@ function aerolome_preprocess_views_view_table(&$vars) {
       }
     }
   }
+}
+
+function aerolome_cmp_vols_date($vol_1, $vol_2) {
+  $vol_1_day = strtotime(get_str_indicator($vol_1->_entity->toArray()["field_tags"][0]["target_id"]));
+  $vol_2_day = strtotime(get_str_indicator($vol_2->_entity->toArray()["field_tags"][0]["target_id"]));
+  return $vol_1_day >= $vol_2_day ? 1 : -1;
+}
+
+function get_str_indicator($day_id) {
+
+  return  match ((int) $day_id) {
+    23 => "next Sunday",
+    17 => "next Monday",
+    18 => "next Tuesday",
+    19 => "next Wednesday",
+    20 => "next Thursday",
+    21 => "next Friday",
+    22 => "next Saturday",
+  };
 }
