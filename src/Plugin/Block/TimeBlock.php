@@ -23,4 +23,11 @@ class TimeBlock extends BlockBase {
     $build['time_block']['#markup'] = \Drupal::service('date.formatter')->format(strtotime("today"), 'custom', 'd F Y', NULL, 'fr');
     return $build;
   }
+
+  /**
+   * @return int
+   */
+  public function getCacheMaxAge() {
+    return 0;
+  }
 }
