@@ -13,7 +13,20 @@ function aerolome_preprocess_views_view_table(&$vars) {
   if (!empty($vars['rows'])) {
     $header = $vars['header'];
     $temp_rendered_array = [];
-    usort($vars["view"]->result, "aerolome_cmp_vols_date");
+    /**
+     * @var  Drupal\Core\Path\CurrentPathStack
+     */
+    $current_path = \Drupal::service("path.current");
+    $splited_path = explode("/", $current_path->getPath());
+    dump($header);
+    if (isset($header["field_tags"], $header["field_tags"]["content"])) {
+      if ($header["field_tags"]["content"] == "Jour") {
+        \Drupal::service('page_cache_kill_switch')->trigger();
+      }
+    }
+    if ($splited_path[1] == "taxonomy" && $splited_path[2] == "term") {
+      usort($vars["view"]->result, "aerolome_cmp_vols_date");
+    }
     for ($i = 0; $i < count($vars["view"]->result); $i++) {
       $row_index = $vars["view"]->result[$i]->index;
       $temp_rendered_array[] = $vars["rows"][$row_index];
