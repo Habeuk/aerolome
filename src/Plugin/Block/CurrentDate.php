@@ -53,14 +53,16 @@ class CurrentDate extends BlockBase {
    */
   public function build() {
     $build = [];
+    // $build['current_date']['#markup'] = \Drupal::service('date.formatter')->format(strtotime("now"), 'custom', "h:s:i", NULL, 'fr');
     $build['current_date']['#markup'] = \Drupal::service('date.formatter')->format(strtotime("today"), 'custom', $this->configuration['date_format'], NULL, 'fr');
     return $build;
   }
 
   /**
-   * @return int
+   * {@inheritdoc}
+   *
    */
   public function getCacheMaxAge() {
-    return 0;
+    return 120;
   }
 }

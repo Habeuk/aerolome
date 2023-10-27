@@ -23,7 +23,7 @@ function aerolome_preprocess_views_view_table(&$vars) {
         \Drupal::service('page_cache_kill_switch')->trigger();
       }
     }
-    if ($splited_path[1] == "taxonomy" && $splited_path[2] == "term") {
+    if ($splited_path[1] == "taxonomy" && $splited_path[2] == "term" || $current_path->getPath() == "/node/27" || $current_path->getPath() == "/node/70") {
       usort($vars["view"]->result, "aerolome_cmp_vols_date");
     }
     for ($i = 0; $i < count($vars["view"]->result); $i++) {
@@ -49,8 +49,17 @@ function aerolome_preprocess_views_view_table(&$vars) {
 }
 
 function aerolome_cmp_vols_date($vol_1, $vol_2) {
+  $current_path = \Drupal::service("path.current")->getPath();
   $vol_1_day = strtotime(get_str_indicator($vol_1->_entity->toArray()["field_tags"][0]["target_id"]));
   $vol_2_day = strtotime(get_str_indicator($vol_2->_entity->toArray()["field_tags"][0]["target_id"]));
+  if ($current_path == "/node/27") {
+    $vol_1_day += (int) $vol_1->_entity->toArray()["field_hour"][0]["value"];
+    $vol_2_day += (int) $vol_2->_entity->toArray()["field_hour"][0]["value"];
+    // } elseif ($current_path == "/node/70") {
+  } else {
+    $vol_1_day += (int) $vol_1->_entity->toArray()["field_hour2"][0]["value"];
+    $vol_2_day += (int) $vol_2->_entity->toArray()["field_hour2"][0]["value"];
+  }
   return $vol_1_day >= $vol_2_day ? 1 : -1;
 }
 
