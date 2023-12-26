@@ -1,9 +1,9 @@
 {
   "name": "habeuk/aerolome",
   "description": "Module pour l'intégration de paragraphes drupal",
-  "type": "drupal-module-custom",
+  "type": "drupal-custom-module",
   "require": {
-    "habeuk/formatage_models": "dev-3x | ^3.1"
+    "habeuk/formatage_models": "dev-3x | ^3.1|^4.0|dev-4x"
   },
   "license": "MIT",
   "authors": [
